@@ -1,0 +1,118 @@
+﻿{
+    "variable":  [
+                     {
+                         "key":  "baseUrl",
+                         "value":  "http://localhost:3000"
+                     }
+                 ],
+    "info":  {
+                 "description":  "Coleccion de pruebas API REST ContentFlow. Base URL configurable. No contiene credenciales.",
+                 "name":  "ContentFlow EP2 - Forma A",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+             },
+    "item":  [
+                 {
+                     "name":  "01 - Health",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "{{baseUrl}}/api/health"
+                                 }
+                 },
+                 {
+                     "name":  "02 - Consultar usuarios",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "{{baseUrl}}/api/usuarios?pagina=1\u0026limite=10"
+                                 }
+                 },
+                 {
+                     "name":  "03 - Consultar publicaciones",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "{{baseUrl}}/api/publicaciones?categoria=Deportes\u0026limite=5"
+                                 }
+                 },
+                 {
+                     "name":  "04 - Crear usuario temporal",
+                     "request":  {
+                                     "url":  "{{baseUrl}}/api/usuarios",
+                                     "method":  "POST",
+                                     "body":  {
+                                                  "raw":  "{\"_id\":\"user_API_EP2_001\",\"nombre\":\"Usuario Prueba\",\"correo\":\"prueba@contentflow.example\",\"pais\":\"Chile\",\"genero\":\"Otro\",\"dispositivo\":\"Desktop\"}",
+                                                  "mode":  "raw"
+                                              },
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "05 - Actualizar usuario temporal",
+                     "request":  {
+                                     "url":  "{{baseUrl}}/api/usuarios/user_API_EP2_001",
+                                     "method":  "PATCH",
+                                     "body":  {
+                                                  "raw":  "{\"nombre\":\"Usuario Actualizado\",\"pais\":\"Colombia\",\"dispositivo\":\"Mobile\"}",
+                                                  "mode":  "raw"
+                                              },
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "06 - Eliminar usuario temporal",
+                     "request":  {
+                                     "method":  "DELETE",
+                                     "url":  "{{baseUrl}}/api/usuarios/user_API_EP2_001"
+                                 }
+                 },
+                 {
+                     "name":  "07 - Crear publicacion temporal",
+                     "request":  {
+                                     "url":  "{{baseUrl}}/api/publicaciones",
+                                     "method":  "POST",
+                                     "body":  {
+                                                  "raw":  "{\"_id\":\"pub_API_EP2_001\",\"usuario_id\":\"user_359\",\"contenido\":\"Publicacion de prueba EP2\",\"categoria\":\"Deportes\",\"hashtags\":[\"#ContentFlow\",\"#EP2\"],\"tipo\":\"Video\"}",
+                                                  "mode":  "raw"
+                                              },
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 },
+                 {
+                     "name":  "08 - Validacion HTTP 400",
+                     "request":  {
+                                     "method":  "GET",
+                                     "url":  "{{baseUrl}}/api/usuarios?pagina=-1"
+                                 }
+                 },
+                 {
+                     "name":  "09 - Usuario inexistente HTTP 404",
+                     "request":  {
+                                     "url":  "{{baseUrl}}/api/usuarios/user_API_EP2_INEXISTENTE",
+                                     "method":  "PATCH",
+                                     "body":  {
+                                                  "raw":  "{\"nombre\":\"Usuario No Existente\"}",
+                                                  "mode":  "raw"
+                                              },
+                                     "header":  [
+                                                    {
+                                                        "key":  "Content-Type",
+                                                        "value":  "application/json"
+                                                    }
+                                                ]
+                                 }
+                 }
+             ]
+}
